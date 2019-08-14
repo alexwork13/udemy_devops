@@ -73,6 +73,16 @@ resource "aws_security_group" "public_sg" {
   vpc_id = "${aws_vpc.main.id}"
   description = "public security group for EC2"
 
+  dynamic "ingress" {
+    for_each = ["22", "80", "443"]
+    content {
+      from_port = ingress.value
+      to_port = ingress.value
+      protocol = "TCP"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+/*
   ingress {
     from_port = 22
     to_port = 22
@@ -94,7 +104,7 @@ resource "aws_security_group" "public_sg" {
     cidr_blocks       = ["0.0.0.0/0"]
   }
 
-
+*/
   egress {
     from_port         = 0
     to_port           = 0

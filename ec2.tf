@@ -10,7 +10,10 @@ resource "aws_instance" "my_webserver1" {
   instance_type          = "t2.micro"
   iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.id}"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
-  user_data              = file("./data/user_data1.sh")
+  user_data              =  templatefile("./data/user_data.sh.tpl", {
+        number="web1",
+        name="test1"
+  })
   subnet_id              = "${aws_subnet.public1.id}"
   key_name               = "${aws_key_pair.my-test-key.key_name}"
 
@@ -18,7 +21,7 @@ resource "aws_instance" "my_webserver1" {
     Name  = "Web Server 1 Build by Terraform"
     Owner = "Alexander Palazchenko"
   }
-  depends_on = [aws_s3_bucket_object.object, aws_iam_role.s3fullaccess]
+  depends_on = [aws_iam_role.s3fullaccess]  //aws_s3_bucket_object.object,
 }
 
 resource "aws_instance" "my_webserver2" {
@@ -26,7 +29,10 @@ resource "aws_instance" "my_webserver2" {
   instance_type          = "t2.micro"
   iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.id}"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
-  user_data              = file("./data/user_data2.sh")
+  user_data              = templatefile("./data/user_data.sh.tpl", {
+        number="web2",
+        name="test2"
+  })
   subnet_id              = "${aws_subnet.public2.id}"
   key_name               = "${aws_key_pair.my-test-key.key_name}"
 
@@ -34,6 +40,6 @@ resource "aws_instance" "my_webserver2" {
     Name  = "Web Server 2 Build by Terraform"
     Owner = "Alexander Palazchenko"
   }
-  depends_on = [aws_s3_bucket_object.object, aws_iam_role.s3fullaccess]
+  depends_on = [aws_iam_role.s3fullaccess]   //aws_s3_bucket_object.object,
 }
 

@@ -7,7 +7,7 @@ resource "aws_s3_bucket" "test-palach-devops" {
     Environment = "Dev"
   }
 }
-
+/*
 resource "aws_s3_bucket_object" "object" {
   bucket = "test-palach-devops13"
   key    = "web1/index.html"
@@ -25,3 +25,4 @@ resource "aws_s3_bucket_object" "object2" {
 
   depends_on = [aws_s3_bucket.test-palach-devops]
 }
+*/
