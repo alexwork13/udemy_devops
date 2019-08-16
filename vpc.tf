@@ -11,6 +11,8 @@ resource "aws_vpc" "main" {
 ///  Create public subnets  ///
 data "aws_availability_zones" "vailability_zones" {}   /// data source of zone
 
+
+
 /// 1st subnet  ///
 resource "aws_subnet" "public1" {
   vpc_id = "${aws_vpc.main.id}"
