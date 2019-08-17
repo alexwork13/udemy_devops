@@ -15,13 +15,13 @@ data "aws_ami" "ami-linux2" {
   }
 }
 
-
+/*
 resource "aws_instance" "my_webserver1" {
   ami                    = data.aws_ami.ami-linux2.id
   instance_type          = "t2.micro"
   iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.id}"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
-  user_data              =  templatefile("./data/user_data.sh.tpl", {
+  user_data              =  templatefile("./data/user_data.sh", {
         number="web1",
         name="test1"
   })
@@ -43,7 +43,7 @@ resource "aws_instance" "my_webserver2" {
   instance_type          = "t2.micro"
   iam_instance_profile   = "${aws_iam_instance_profile.instance_profile.id}"
   vpc_security_group_ids = [aws_security_group.public_sg.id]
-  user_data              = templatefile("./data/user_data.sh.tpl", {
+  user_data              = templatefile("./data/user_data.sh", {
         number="web2",
         name="test2"
   })
@@ -70,3 +70,5 @@ resource "aws_eip" "for_web2" {
   instance = aws_instance.my_webserver2.id
   depends_on = [aws_instance.my_webserver2]
 }
+
+*/

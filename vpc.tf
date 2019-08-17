@@ -72,7 +72,7 @@ resource "aws_route_table_association" "public2" {
 /// SG  ///
 resource "aws_security_group" "public_sg" {
   name   = "public_sg"
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   description = "public security group for EC2"
 
   dynamic "ingress" {
